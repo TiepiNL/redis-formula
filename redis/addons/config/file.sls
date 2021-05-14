@@ -2,7 +2,7 @@
 # vim: ft=sls
 
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot ~ "/map.jinja" import redis with context %}
+{%- from tplroot ~ "/map.jinja" import redis_settings as redis with context %}
 
 # Include for requisites.
 include:
