@@ -10,7 +10,7 @@ redis_user_group:
     - name: {{ r.group }}
   user.present:
     - name: {{ r.user }}
-    - gid_from_name: True
+    - usergroup: True
     - home: {{ r.home }}
     - require:
       - group: redis_user_group
@@ -76,6 +76,21 @@ redis_disable_transparent_huge_pages:
     cmd.run:
       - name: echo "never" > /sys/kernel/mm/transparent_hugepage/enabled
       - unless: grep -i '^never' /sys/kernel/mm/transparent_hugepage/enabled
+    {%- endif %}
+
+    {%- if grains.os_family|lower == 'arch' %}
+redis_service_simple:
+  file.replace:
+    - name: {{ r.dir.service }}/redis.service
+    - pattern: Type=notify
+    - repl: Type=simple
+    - onlyif: test -f {{ r.dir.service }}/redis.service
+    - require_in:
+      - service: redis_service
+  cmd.run:
+    - name: systemctl daemon-reload
+    - onchanges:
+      - file: redis_service_simple
     {%- endif %}
 
 redis_service:

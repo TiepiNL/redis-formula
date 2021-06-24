@@ -16,7 +16,6 @@ Debian:
 RedHat:
   pkg_name: redis
   python_dev_package: python-devel
-  svc_name: redis
   cfg_name: /etc/redis.conf
   cfg_version: '3.0'
   logfile: /var/log/redis/redis.log
@@ -29,7 +28,6 @@ RedHat:
     pidfile: /var/run/redis/sentinel.pid
 Arch:
   pkg_name: redis
-  svc_name: redis
   cfg_name: /etc/redis.conf
   cfg_version: '3.0'
   logfile: /var/log/redis/redis.log
@@ -37,7 +35,6 @@ Arch:
   daemonize: 'no'
 FreeBSD:
   pkg_name: redis
-  svc_name: redis
   cfg_name: /usr/local/etc/redis.conf
   cfg_version: '3.0'
   logfile: /var/log/redis/redis.log
@@ -48,7 +45,6 @@ Suse:
   cfg_name: /etc/redis/default.conf
   pkg_name: redis
   python_dev_package: python-devel
-  svc_name: redis@default
   logfile: /var/log/redis/default.log
   pidfile: /var/run/redis/default.pid
   daemonize: 'no'
@@ -58,5 +54,5 @@ Suse:
   sentinel_logfile: /var/log/redis/sentinel.log
   sentinel:
     pidfile: /var/run/redis/sentinel.pid
+  svc_name: redis@default
   disable_transparent_huge_pages: true
-  systemd_type: simple
